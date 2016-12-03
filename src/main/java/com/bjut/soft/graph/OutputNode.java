@@ -1,5 +1,7 @@
 package com.bjut.soft.graph;
 
+import com.bjut.soft.utils.TagUtils;
+
 /**
  * Created by toy on 29/11/2016.
  */
@@ -64,6 +66,8 @@ public class OutputNode implements INode {
     }
 
     public static INode getNode(String name, int layer, INode y1) {
-        return new OutputNode(name, layer, y1);
+        TagUtils path = TagUtils.getPath();
+        String tmp = path.toString();
+        return new OutputNode(tmp, layer, y1);
     }
 }

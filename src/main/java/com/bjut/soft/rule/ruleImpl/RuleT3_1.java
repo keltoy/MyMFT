@@ -34,7 +34,7 @@ public class RuleT3_1 extends PredRule {
 
     @Override
     public void genBacktrackNodes(List<INode> nodes, INode node) {
-        ListUtils.backtrackToList(node.getY2(), nodes);
+        ListUtils.backtrackToList(node.getY2(), nodes, node.getLayer());
     }
 
 }

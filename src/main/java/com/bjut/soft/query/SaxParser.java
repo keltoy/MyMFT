@@ -4,11 +4,14 @@ import com.bjut.soft.graph.INode;
 import com.bjut.soft.pathParser.ASTPath;
 import com.bjut.soft.pathParser.QueryParser;
 import com.bjut.soft.rule.RuleFactory;
+import com.bjut.soft.utils.TagUtils;
+import com.sun.tools.javac.tree.JCTree;
 import jdk.internal.org.xml.sax.Attributes;
 import jdk.internal.org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -19,6 +22,7 @@ public class SaxParser extends DefaultHandler {
     private RuleFactory factory;
     private int layer = 0;
     private List<INode> entryList;
+    private TagUtils record;
     public SaxParser(String xPath) {
         super();
         QueryParser parser = new QueryParser();
@@ -36,18 +40,20 @@ public class SaxParser extends DefaultHandler {
     @Override
     public void startDocument() throws org.xml.sax.SAXException {
         super.startDocument();
-        System.out.println("=================== START DOC ====================");
+        record = TagUtils.getPath();
+        //System.out.println("=================== START DOC ====================");
     }
 
     @Override
     public void endDocument() throws org.xml.sax.SAXException {
         super.endDocument();
-        System.out.println("=================== END  DOC ====================");
+        //System.out.println("=================== END  DOC ====================");
     }
 
     @Override
     public void startElement(String uri, String localName, String qName, org.xml.sax.Attributes attributes) throws org.xml.sax.SAXException {
         List<INode> listNew = new ArrayList<>();
+        record.addToPath(qName);
         for (INode each: entryList) {
             factory.doStartTag(listNew, each, qName, layer);
         }
@@ -63,6 +69,7 @@ public class SaxParser extends DefaultHandler {
             factory.doEndTag(listNew, each, qName, layer);
         }
         --layer;
+        record.removeToPath();
         entryList = listNew;
         super.endElement(uri, localName, qName);
     }

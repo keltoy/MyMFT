@@ -18,7 +18,7 @@ public class Main {
 
 
         String filePath = "test-case/testcase1.xml";
-        String xPath = "//A[B][E]";
+        String xPath = "//A[//B[C]][//D]/E";
         SAXParserFactory factory = SAXParserFactory.newInstance();
         SAXParser parser = factory.newSAXParser();
         File f = new File(filePath);

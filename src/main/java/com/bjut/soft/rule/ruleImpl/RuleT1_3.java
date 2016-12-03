@@ -36,7 +36,7 @@ public class RuleT1_3 extends PathRule {
 
     @Override
     public void genBacktrackNodes(List<INode> nodes, INode node) {
-        ListUtils.backtrackToList(node.getY1(), nodes);
+        ListUtils.backtrackToList(node.getY1(), nodes, node.getLayer());
     }
 
 }

@@ -16,9 +16,8 @@ public class ListUtils {
         }
     }
 
-    public static void backtrackToList(INode node, List<INode> list) {
-        if (!list.contains(node)) {
+    public static void backtrackToList(INode node, List<INode> list, int layer) {
+        if (node.getLayer() == layer-1)
             list.add(node);
-        }
     }
 }

@@ -27,7 +27,7 @@ public class RuleT3_2 extends PredRule {
         INode y1 = node.getY1();
         INode newNode = q1.productNode(node.getLayer()+1, y1, y2, this.q1, nodes);
         ListUtils.addToList(newNode, nodes);
-        ListUtils.addToList(y1, nodes);
+        ListUtils.addToList(y2, nodes);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class RuleT3_2 extends PredRule {
 
     @Override
     public void genBacktrackNodes(List<INode> nodes, INode node) {
-        ListUtils.backtrackToList(node.getY2(), nodes);
+        ListUtils.backtrackToList(node.getY2(), nodes, node.getLayer());
     }
 
 }
