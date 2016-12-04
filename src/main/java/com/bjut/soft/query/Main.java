@@ -17,8 +17,8 @@ public class Main {
         System.out.println(cur);
 
 
-        String filePath = "test-case/testcase1.xml";
-        String xPath = "//A[//B[C]][//D]/E";
+        String filePath = "test-case/xmark_20.xml";
+        String xPath = "//open_auction/bidder/time";
         SAXParserFactory factory = SAXParserFactory.newInstance();
         SAXParser parser = factory.newSAXParser();
         File f = new File(filePath);

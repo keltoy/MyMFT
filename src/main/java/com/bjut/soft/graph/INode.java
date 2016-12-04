@@ -13,6 +13,6 @@ public interface INode extends Cloneable{
     void setY2(INode y2);
     INode getY1();
     INode getY2();
-    INode copyNode();
+    INode copyNode(int layer, INode y1, INode y2);
     INode nil = new NilNode();
 }

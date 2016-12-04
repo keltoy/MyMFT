@@ -6,7 +6,7 @@ import com.bjut.soft.rule.IRule;
 import com.bjut.soft.rule.PathRule;
 import com.bjut.soft.utils.ListUtils;
 
-import java.util.List;
+import java.util.Queue;
 
 /**
  * Created by toy on 29/11/2016.
@@ -17,10 +17,10 @@ public class RuleT1_4 extends PathRule {
     }
 
     @Override
-    public void genMatchedNodes(List<INode> nodes, INode node, IRule q1, IRule q2, String name) {
-        INode y2 = node.copyNode();
-        y2.setY1(node);
-        y2.setLayer(node.getLayer()+1);
+    public void genMatchedNodes(Queue<INode> nodes, INode node, IRule q1, IRule q2, String name) {
+        INode y2 = node.copyNode(node.getLayer(), node, node.getY2());
+        /*y2.setY1(node);
+        y2.setLayer(node.getLayer()+1);*/
         INode y1 = q2.productNode(node.getLayer()+1, y2, Node.nil, this.getQ2(), nodes);
         INode newNode = q1.productNode(node.getLayer()+1, y1, y2, q1.getQ1(), nodes);
 
@@ -30,15 +30,15 @@ public class RuleT1_4 extends PathRule {
     }
 
     @Override
-    public void genOtherNodes(List<INode> nodes, INode node, IRule q1, IRule q2, String name) {
-        INode newNode = node.copyNode();
-        newNode.setY1(node);
-        newNode.setLayer(node.getLayer()+1);
+    public void genOtherNodes(Queue<INode> nodes, INode node, IRule q1, IRule q2, String name) {
+        INode newNode = node.copyNode(node.getLayer()+1, node, node.getY2());
+        /*newNode.setY1(node);
+        newNode.setLayer(node.getLayer()+1);*/
         ListUtils.addToList(newNode, nodes);
     }
 
     @Override
-    public void genBacktrackNodes(List<INode> nodes, INode node) {
+    public void genBacktrackNodes(Queue<INode> nodes, INode node) {
         ListUtils.backtrackToList(node.getY1(), nodes, node.getLayer());
     }
 

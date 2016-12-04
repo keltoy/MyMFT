@@ -9,10 +9,7 @@ import com.bjut.soft.pathParser.AxisType;
 import com.bjut.soft.rule.ruleImpl.*;
 import com.bjut.soft.rule.ruleImpl.RuleT1_1;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by toy on 28/11/2016.
@@ -25,9 +22,9 @@ public class RuleFactory {
         rules.put(-2, RuleOutput.getRule());
     }
 
-    public List<INode> initNodes() {
+    public Queue<INode> initNodes() {
         IRule rule = rules.get(0);
-        List<INode> list = new ArrayList<>();
+        Queue<INode> list = new ArrayDeque<>(1);
         INode node = rule.productNode(0, Node.nil,  Node.nil, 0, list);
         list.add(node);
         return list;
@@ -136,17 +133,17 @@ public class RuleFactory {
         mapRules(nextPreds, curIndex, predIndex);
     }
 
-    public void doStartTag(List<INode> list, INode node, String tagName, int layer) {
+    public void doStartTag(Queue<INode> list, INode node, String tagName, int layer) {
         if (node.getLayer() < layer) {
             list.add(node);
         } else if (node.getLayer() == layer) {
             selectTag(list, node, tagName);
         } else {
-            System.out.println("node.layer > layer");
+            //System.out.println("node.layer > layer");
         }
     }
 
-    public void doEndTag(List<INode> list, INode node, String tagName, int layer) {
+    public void doEndTag(Queue<INode> list, INode node, String tagName, int layer) {
         if (node.getLayer() < layer) {
             list.add(node);
         } else if (node.getLayer() == layer) {
@@ -155,7 +152,7 @@ public class RuleFactory {
         }
     }
 
-    private void selectTag(List<INode> list, INode node, String tagName) {
+    private void selectTag(Queue<INode> list, INode node, String tagName) {
         IRule rule = rules.get(node.getType());
         IRule q1 = rules.get(rule.getQ1());
         IRule q2 = rules.get(rule.getQ2());

@@ -39,7 +39,7 @@ public class SkipNode implements INode {
     }
 
     @Override
-    public INode copyNode() {
+    public INode copyNode(int layer, INode y1, INode y2) {
         return this;
     }
 

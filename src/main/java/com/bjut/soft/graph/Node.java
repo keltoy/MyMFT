@@ -25,13 +25,16 @@ public class Node implements INode {
     }
 
     @Override
-    public INode copyNode() {
+    public INode copyNode(int layer, INode y1, INode y2) {
+        return new Node(tagName, layer, type, y1, y2);
+        /*
         try {
             return (INode)clone();
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
         return Node.nil;
+        */
     }
 
     public void setY2(INode y2) {
@@ -76,6 +79,7 @@ public class Node implements INode {
 
     @Override
     protected Object clone() throws CloneNotSupportedException {
+        /*return new Node(this.tagName, this.layer, this.type, this, this.y2);*/
         return super.clone();
     }
 }

@@ -5,8 +5,8 @@ import com.bjut.soft.rule.IRule;
 import com.bjut.soft.rule.RuleFactory;
 import com.bjut.soft.utils.ListUtils;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
 /**
  * Created by toy on 29/11/2016.
@@ -41,17 +41,17 @@ public class RuleT2_2 implements IRule {
     }
 
     @Override
-    public void genMatchedNodes(List<INode> nodes, INode node, IRule q1, IRule q2, String name) {
+    public void genMatchedNodes(Queue<INode> nodes, INode node, IRule q1, IRule q2, String name) {
 
     }
 
     @Override
-    public void genOtherNodes(List<INode> nodes, INode node, IRule q1, IRule q2, String name) {
+    public void genOtherNodes(Queue<INode> nodes, INode node, IRule q1, IRule q2, String name) {
 
     }
 
     @Override
-    public void genBacktrackNodes(List<INode> nodes, INode node) {
+    public void genBacktrackNodes(Queue<INode> nodes, INode node) {
 
     }
 
@@ -71,7 +71,7 @@ public class RuleT2_2 implements IRule {
     }
 
     @Override
-    public INode productNode(int layer, INode y1, INode y2, int type, List<INode> list) {
+    public INode productNode(int layer, INode y1, INode y2, int type, Queue<INode> list) {
         Map<Integer, IRule> rules = RuleFactory.getRules();
         IRule ruleQ1 = rules.get(getQ1());
         IRule ruleQ2 = rules.get(getQ2());

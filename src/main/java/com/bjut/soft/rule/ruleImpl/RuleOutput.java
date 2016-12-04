@@ -5,7 +5,7 @@ import com.bjut.soft.graph.Node;
 import com.bjut.soft.rule.IRule;
 import com.bjut.soft.utils.ListUtils;
 
-import java.util.List;
+import java.util.Queue;
 
 /**
  * Created by toy on 02/12/2016.
@@ -25,19 +25,19 @@ public class RuleOutput implements IRule {
     }
 
     @Override
-    public void genMatchedNodes(List<INode> nodes, INode node, IRule q1, IRule q2, String name) {
+    public void genMatchedNodes(Queue<INode> nodes, INode node, IRule q1, IRule q2, String name) {
         ListUtils.addToList(node, nodes);
     }
 
     @Override
-    public void genOtherNodes(List<INode> nodes, INode node, IRule q1, IRule q2, String name) {
+    public void genOtherNodes(Queue<INode> nodes, INode node, IRule q1, IRule q2, String name) {
         ListUtils.addToList(node, nodes);
 
     }
 
     @Override
-    public void genBacktrackNodes(List<INode> nodes, INode node) {
-        System.out.println(node.getTagName());
+    public void genBacktrackNodes(Queue<INode> nodes, INode node) {
+        /*System.out.println(node.getTagName());*/
     }
 
     @Override
@@ -56,7 +56,7 @@ public class RuleOutput implements IRule {
     }
 
     @Override
-    public INode productNode(int layer, INode y1, INode y2, int type, List<INode> list) {
+    public INode productNode(int layer, INode y1, INode y2, int type, Queue<INode> list) {
         return Node.nil;
     }
 

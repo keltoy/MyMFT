@@ -10,9 +10,7 @@ import jdk.internal.org.xml.sax.Attributes;
 import jdk.internal.org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 
 /**
@@ -21,8 +19,14 @@ import java.util.List;
 public class SaxParser extends DefaultHandler {
     private RuleFactory factory;
     private int layer = 0;
-    private List<INode> entryList;
-    private TagUtils record;
+    //private List<INode> entryList;
+    private Queue<INode> entryList;
+    long time = 0;
+    long start = 0;
+    long end = 0;
+    //private List<INode> listNew = new ArrayList<>(100);
+    private Queue<INode> listNew = new ArrayDeque<>(100);
+    //private TagUtils record;
     public SaxParser(String xPath) {
         super();
         QueryParser parser = new QueryParser();
@@ -40,43 +44,52 @@ public class SaxParser extends DefaultHandler {
     @Override
     public void startDocument() throws org.xml.sax.SAXException {
         super.startDocument();
-        record = TagUtils.getPath();
+        /*record = TagUtils.getPath();*/
         //System.out.println("=================== START DOC ====================");
     }
 
     @Override
     public void endDocument() throws org.xml.sax.SAXException {
         super.endDocument();
+        System.out.println(time);
         //System.out.println("=================== END  DOC ====================");
     }
 
     @Override
     public void startElement(String uri, String localName, String qName, org.xml.sax.Attributes attributes) throws org.xml.sax.SAXException {
-        List<INode> listNew = new ArrayList<>();
-        record.addToPath(qName);
+        listNew.clear();
+        start = System.currentTimeMillis();
+        //List<INode> listNew = new ArrayList<>();
+        //record.addToPath(qName);
         for (INode each: entryList) {
             factory.doStartTag(listNew, each, qName, layer);
         }
         entryList = listNew;
         ++layer;
-        super.startElement(uri, localName, qName, attributes);
+        //super.startElement(uri, localName, qName, attributes);
+        end = System.currentTimeMillis();
+        time += (end - start);
     }
 
     @Override
     public void endElement(String uri, String localName, String qName) throws org.xml.sax.SAXException {
-        List<INode> listNew = new ArrayList<>();
+        listNew.clear();
+        start = System.currentTimeMillis();
+        //List<INode> listNew = new ArrayList<>();
         for (INode each: entryList) {
             factory.doEndTag(listNew, each, qName, layer);
         }
         --layer;
-        record.removeToPath();
+        //record.removeToPath();
         entryList = listNew;
-        super.endElement(uri, localName, qName);
+        //super.endElement(uri, localName, qName);
+        end = System.currentTimeMillis();
+        time += (end - start);
     }
 
     @Override
     public void characters(char[] ch, int start, int length) throws org.xml.sax.SAXException {
-        super.characters(ch, start, length);
+        //super.characters(ch, start, length);
     }
 
 

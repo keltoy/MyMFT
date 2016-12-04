@@ -3,7 +3,7 @@ package com.bjut.soft.rule;
 import com.bjut.soft.graph.INode;
 import com.bjut.soft.graph.Node;
 
-import java.util.List;
+import java.util.Queue;
 
 /**
  * Created by toy on 28/11/2016.
@@ -57,7 +57,7 @@ public abstract class PathRule implements IRule{
     }
 
     @Override
-    public INode productNode(int layer, INode y1, INode y2, int type, List<INode> list) {
+    public INode productNode(int layer, INode y1, INode y2, int type, Queue<INode> list) {
         return Node.getNode(name, layer, type, y1, y2);
     }
 

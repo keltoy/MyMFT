@@ -5,7 +5,7 @@ import com.bjut.soft.rule.IRule;
 import com.bjut.soft.rule.PredRule;
 import com.bjut.soft.utils.ListUtils;
 
-import java.util.List;
+import java.util.Queue;
 
 /**
  * Created by toy on 29/11/2016.
@@ -20,7 +20,7 @@ public class RuleT3_1 extends PredRule {
     }
 
     @Override
-    public void genMatchedNodes(List<INode> nodes, INode node, IRule q1, IRule q2, String name) {
+    public void genMatchedNodes(Queue<INode> nodes, INode node, IRule q1, IRule q2, String name) {
         INode y2 = node;
         INode y1 = node.getY1();
         INode newNode = q1.productNode(node.getLayer()+1, y1, y2, this.getQ1(), nodes);
@@ -28,12 +28,12 @@ public class RuleT3_1 extends PredRule {
     }
 
     @Override
-    public void genOtherNodes(List<INode> nodes, INode node, IRule q1, IRule q2, String name) {
+    public void genOtherNodes(Queue<INode> nodes, INode node, IRule q1, IRule q2, String name) {
         ListUtils.addToList(node, nodes);
     }
 
     @Override
-    public void genBacktrackNodes(List<INode> nodes, INode node) {
+    public void genBacktrackNodes(Queue<INode> nodes, INode node) {
         ListUtils.backtrackToList(node.getY2(), nodes, node.getLayer());
     }
 

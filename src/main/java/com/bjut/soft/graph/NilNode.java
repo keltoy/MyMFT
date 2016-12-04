@@ -48,7 +48,7 @@ public class NilNode implements INode {
     }
 
     @Override
-    public INode copyNode() {
+    public INode copyNode(int layer, INode y1, INode y2) {
         return Node.nil;
     }
 
