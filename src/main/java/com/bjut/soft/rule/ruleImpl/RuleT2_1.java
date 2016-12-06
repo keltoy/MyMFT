@@ -63,9 +63,7 @@ public class RuleT2_1 implements IRule {
 
     @Override
     public INode productNode(int layer, INode y1, INode y2, int type, Queue<INode> list) {
-        if (list.contains(y1)) {
-            return Node.nil;
-        }
+        //return Node.nil;
         return y1;
     }
 

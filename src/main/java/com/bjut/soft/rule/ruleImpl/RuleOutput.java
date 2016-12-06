@@ -37,7 +37,7 @@ public class RuleOutput implements IRule {
 
     @Override
     public void genBacktrackNodes(Queue<INode> nodes, INode node) {
-        /*System.out.println(node.getTagName());*/
+        //System.out.println(node.getTagName());
     }
 
     @Override

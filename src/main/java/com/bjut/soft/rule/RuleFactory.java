@@ -24,6 +24,7 @@ public class RuleFactory {
 
     public Queue<INode> initNodes() {
         IRule rule = rules.get(0);
+        ruleIndex = 0;
         Queue<INode> list = new ArrayDeque<>(1);
         INode node = rule.productNode(0, Node.nil,  Node.nil, 0, list);
         list.add(node);
@@ -139,7 +140,7 @@ public class RuleFactory {
         } else if (node.getLayer() == layer) {
             selectTag(list, node, tagName);
         } else {
-            //System.out.println("node.layer > layer");
+            System.out.println("node.layer > layer");
         }
     }
 

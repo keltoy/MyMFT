@@ -24,7 +24,8 @@ public class RuleT1_2 extends PathRule {
         INode y1 = OutputNode.getNode(name, node.getLayer()+1, y2);
         INode newNode = q1.productNode(node.getLayer()+1, y1, y2, this.q1, nodes);
         ListUtils.addToList(newNode, nodes);
-        ListUtils.addToList(y2, nodes);
+        if (newNode != y2)
+            ListUtils.addToList(y2, nodes);
     }
 
     @Override

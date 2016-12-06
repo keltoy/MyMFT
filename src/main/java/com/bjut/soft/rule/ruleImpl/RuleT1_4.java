@@ -18,15 +18,17 @@ public class RuleT1_4 extends PathRule {
 
     @Override
     public void genMatchedNodes(Queue<INode> nodes, INode node, IRule q1, IRule q2, String name) {
-        INode y2 = node.copyNode(node.getLayer(), node, node.getY2());
+        INode y2 = node.copyNode(node.getLayer()+1, node, node.getY2());
         /*y2.setY1(node);
         y2.setLayer(node.getLayer()+1);*/
         INode y1 = q2.productNode(node.getLayer()+1, y2, Node.nil, this.getQ2(), nodes);
         INode newNode = q1.productNode(node.getLayer()+1, y1, y2, q1.getQ1(), nodes);
 
         ListUtils.addToList(newNode, nodes);
-        ListUtils.addToList(y1, nodes);
-        ListUtils.addToList(y2, nodes);
+        if (newNode != y1)
+            ListUtils.addToList(y1, nodes);
+        if (newNode != y2)
+            ListUtils.addToList(y2, nodes);
     }
 
     @Override
