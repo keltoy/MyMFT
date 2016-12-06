@@ -20,9 +20,10 @@ public class SaxParser extends DefaultHandler {
     private RuleFactory factory;
     private int layer = 0;
     private Queue<INode> entryList;
-    private long time = 0;
-    private long start = 0;
-    private long end = 0;
+    private long time = 0L;
+    private long start = 0L;
+    private long middle = 0L;
+    private long end = 0L;
     private Queue<INode> listNew = new ArrayDeque<>(100);
     //private TagUtils record;
     public SaxParser(String xPath) {
@@ -61,38 +62,48 @@ public class SaxParser extends DefaultHandler {
 
     @Override
     public void startElement(String uri, String localName, String qName, org.xml.sax.Attributes attributes) throws org.xml.sax.SAXException {
-        start = System.currentTimeMillis();
+
         Queue<INode> tmp;
         listNew.clear();
         //record.addToPath(qName);
+
+        start = System.currentTimeMillis();
+        middle = System.currentTimeMillis();
         for (INode each: entryList) {
             factory.doStartTag(listNew, each, qName, layer);
         }
+        end = System.currentTimeMillis();
+        time += (end - start) - (middle-start);
+
         tmp = entryList;
         entryList = listNew;
         listNew = tmp;
         ++layer;
         //super.startElement(uri, localName, qName, attributes);
-        end = System.currentTimeMillis();
-        time += (end - start);
+
     }
 
     @Override
     public void endElement(String uri, String localName, String qName) throws org.xml.sax.SAXException {
-        start = System.currentTimeMillis();
+
         Queue<INode> tmp;
         listNew.clear();
+
+        start = System.currentTimeMillis();
+        middle = System.currentTimeMillis();
         for (INode each: entryList) {
             factory.doEndTag(listNew, each, qName, layer);
         }
+        end = System.currentTimeMillis();
+        time += (end - start) - (middle-start);
+
         --layer;
         //record.removeToPath();
         tmp = entryList;
         entryList = listNew;
         listNew = tmp;
         super.endElement(uri, localName, qName);
-        end = System.currentTimeMillis();
-        time += (end - start);
+
     }
 
     @Override

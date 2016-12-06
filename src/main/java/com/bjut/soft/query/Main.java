@@ -30,7 +30,7 @@ public class Main {
         }
     }
     public void runApp(boolean isWarmup) {
-        int nLoop = 0;
+        int nLoop = 10;
         try {
             for (int i = 0; i < nLoop; ++i) {
                 parser.parse(file, dh);
